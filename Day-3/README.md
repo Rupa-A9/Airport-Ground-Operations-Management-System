@@ -55,7 +55,7 @@ Developed multiple enterprise flows including:
 
 ## Screenshots
 
-[Flows List](screenshots/flows-list.png)
+![Flows List](screenshots/flows-list.png)
 
 
 ---
