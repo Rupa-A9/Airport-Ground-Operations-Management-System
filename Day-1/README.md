@@ -55,7 +55,7 @@ A Salesforce-based Airport Ground Operations Management System was designed to c
 
 ## Screenshots
 
-![Airport App with Custom Objects](screenshots/App page with Custom objects.png)
+![Airport App with Custom Objects](screenshots/App%20page%20with%20Custom%20objects.png)
 ---
 
 ## Progress
