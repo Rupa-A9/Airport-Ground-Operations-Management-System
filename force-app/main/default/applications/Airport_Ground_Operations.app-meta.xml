@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#13426B</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Airport Ground Operations</label>
+    <navType>Standard</navType>
+    <tabs>Aircraft__c</tabs>
+    <tabs>Flight__c</tabs>
+    <tabs>Baggage_Operation__c</tabs>
+    <tabs>Ground_Crew__c</tabs>
+    <tabs>Ground_Service_Task__c</tabs>
+    <tabs>Cleaning_Request__c</tabs>
+    <tabs>Catering_Request__c</tabs>
+    <tabs>Fuel_Request__c</tabs>
+    <tabs>Maintenance_Request__c</tabs>
+    <tabs>Gate__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Airport_Ground_Operations_UtilityBar</utilityBar>
+</CustomApplication>

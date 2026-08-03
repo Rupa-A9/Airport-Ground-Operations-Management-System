@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheduled_Departure_After_Arrival</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Scheduled_Arrival__c)),
+NOT(ISBLANK(Scheduled_Departure__c)),
+Scheduled_Departure__c &lt;= Scheduled_Arrival__c
+)</errorConditionFormula>
+    <errorDisplayField>Scheduled_Departure__c</errorDisplayField>
+    <errorMessage>Scheduled Departure must be later than Scheduled Arrival.</errorMessage>
+</ValidationRule>

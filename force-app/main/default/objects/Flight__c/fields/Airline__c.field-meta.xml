@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Airline__c</fullName>
+    <label>Airline</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Air India</fullName>
+                <default>false</default>
+                <label>Air India</label>
+            </value>
+            <value>
+                <fullName>IndiGo</fullName>
+                <default>false</default>
+                <label>IndiGo</label>
+            </value>
+            <value>
+                <fullName>SpiceJet</fullName>
+                <default>false</default>
+                <label>SpiceJet</label>
+            </value>
+            <value>
+                <fullName>Akasa Air</fullName>
+                <default>false</default>
+                <label>Akasa Air</label>
+            </value>
+            <value>
+                <fullName>Air India Express</fullName>
+                <default>false</default>
+                <label>Air India Express</label>
+            </value>
+            <value>
+                <fullName>Emirates</fullName>
+                <default>false</default>
+                <label>Emirates</label>
+            </value>
+            <value>
+                <fullName>Qatar Airways</fullName>
+                <default>false</default>
+                <label>Qatar Airways</label>
+            </value>
+            <value>
+                <fullName>Singapore Airlines</fullName>
+                <default>false</default>
+                <label>Singapore Airlines</label>
+            </value>
+            <value>
+                <fullName>Lufthansa</fullName>
+                <default>false</default>
+                <label>Lufthansa</label>
+            </value>
+            <value>
+                <fullName>British Airways</fullName>
+                <default>false</default>
+                <label>British Airways</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

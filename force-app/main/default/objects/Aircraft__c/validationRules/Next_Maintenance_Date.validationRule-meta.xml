@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Next_Maintenance_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Last_Maintenance_Date__c)),
+NOT(ISBLANK(Next_Maintenance_Date__c)),
+Next_Maintenance_Date__c &lt;= Last_Maintenance_Date__c
+)</errorConditionFormula>
+    <errorDisplayField>Next_Maintenance_Date__c</errorDisplayField>
+    <errorMessage>Next Maintenance Date must be after Last Maintenance Date.</errorMessage>
+</ValidationRule>

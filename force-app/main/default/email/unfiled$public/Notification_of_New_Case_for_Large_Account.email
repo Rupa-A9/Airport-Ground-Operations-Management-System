@@ -1,0 +1,6 @@
+This is a notification that there was a new case created for {!Account.Name}. Please see the details below:
+
+{!Case.Origin}
+{!Case.Reason}
+{!Case.Type}
+{!Case.Product__c}

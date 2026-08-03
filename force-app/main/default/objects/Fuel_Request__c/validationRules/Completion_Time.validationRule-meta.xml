@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Completion_Time</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Request_Time__c)),
+NOT(ISBLANK(Completion_Time__c)),
+Completion_Time__c &lt;= Request_Time__c
+)</errorConditionFormula>
+    <errorDisplayField>Completion_Time__c</errorDisplayField>
+    <errorMessage>Completion Time must be after Request Time.</errorMessage>
+</ValidationRule>

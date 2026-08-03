@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Departure_After_Actual_Arrival</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(Actual_Arrival__c)),
+NOT(ISBLANK(Actual_Departure__c)),
+Actual_Departure__c &lt;= Actual_Arrival__c
+)</errorConditionFormula>
+    <errorDisplayField>Actual_Departure__c</errorDisplayField>
+    <errorMessage>Actual Departure must be after Actual Arrival.</errorMessage>
+</ValidationRule>

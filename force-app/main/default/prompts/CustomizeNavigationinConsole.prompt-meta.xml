@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Customize Navigation in Console</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>Learn About Console Apps</actionButtonLabel>
+        <actionButtonLink>https://help.salesforce.com/s/articleView?id=service.console_lex_feature_parity.htm&amp;type=5</actionButtonLink>
+        <body>&lt;p&gt;You can add, remove, and reorder navigation items at any time.&lt;/p&gt;</body>
+        <customApplication>standard__LightningSalesConsole</customApplication>
+        <delayDays>5</delayDays>
+        <description>Tell users how to customize the navigation in the Sales Console app.</description>
+        <displayType>DockedComposer</displayType>
+        <endDate>2026-08-10</endDate>
+        <experience>Lightning</experience>
+        <header>Check it out!</header>
+        <imageAltText>Navigation list</imageAltText>
+        <imageLink>https://resources.help.salesforce.com/images/e543ddf8f778368bc30f38f19932cc90.png</imageLink>
+        <imageLocation>Top</imageLocation>
+        <isPublished>true</isPublished>
+        <masterLabel>Customize Navigation in Console</masterLabel>
+        <publishedDate>2026-07-10</publishedDate>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
+        <startDate>2026-07-10</startDate>
+        <targetPageKey1>home</targetPageKey1>
+        <targetPageType>standard__namedPage</targetPageType>
+        <themeColor>Theme1</themeColor>
+        <themeSaturation>Dark</themeSaturation>
+        <timesToDisplay>3</timesToDisplay>
+        <title>Customize Your Console Navigation</title>
+        <userAccess>Everyone</userAccess>
+        <userProfileAccess>Everyone</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>
