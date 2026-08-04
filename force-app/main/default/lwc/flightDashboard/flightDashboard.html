@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Flight Dashboard" icon-name="standard:flight">
+
+        <template if:true={flights}>
+            <lightning-datatable
+                key-field="Id"
+                data={flights}
+                columns={columns}>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                Error loading flight records.
+            </div>
+        </template>
+
+    </lightning-card>
+</template>
