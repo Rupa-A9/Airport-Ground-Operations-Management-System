@@ -58,19 +58,24 @@ public with sharing class FlightService {
 
         if (!flightsToUpdate.isEmpty()) {
 
+            // Update flights
             update flightsToUpdate;
 
+            // Store ready flight IDs
             Set<Id> readyFlightIds = new Set<Id>();
 
             for (Flight__c flight : flightsToUpdate) {
+
                 readyFlightIds.add(flight.Id);
+
+                // Future Method
+                FlightFutureService.sendFlightNotification(flight.Id);
             }
 
+            // Queueable Job
             System.enqueueJob(
                 new FlightPostProcessingJob(readyFlightIds)
             );
-}
-
+        }
     }
-
 }
