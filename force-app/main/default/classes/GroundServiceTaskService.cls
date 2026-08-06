@@ -10,6 +10,9 @@ public with sharing class GroundServiceTaskService {
         for (Ground_Service_Task__c task : newTasks) {
 
             Ground_Service_Task__c oldTask = oldMap.get(task.Id);
+            if(oldTask == null){
+                continue;
+            }
 
             if (task.Task_Status__c == 'Completed'
                 && oldTask.Task_Status__c != 'Completed'
