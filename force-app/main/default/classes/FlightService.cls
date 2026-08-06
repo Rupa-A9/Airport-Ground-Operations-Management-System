@@ -57,8 +57,19 @@ public with sharing class FlightService {
         }
 
         if (!flightsToUpdate.isEmpty()) {
+
             update flightsToUpdate;
-        }
+
+            Set<Id> readyFlightIds = new Set<Id>();
+
+            for (Flight__c flight : flightsToUpdate) {
+                readyFlightIds.add(flight.Id);
+            }
+
+            System.enqueueJob(
+                new FlightPostProcessingJob(readyFlightIds)
+            );
+}
 
     }
 
