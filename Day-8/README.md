@@ -1,57 +1,166 @@
-# Day 8 – Asynchronous Apex
+# Day 8 – Asynchronous Apex (Chapter 8)
 
-## Objective
-Learned and implemented Salesforce Asynchronous Apex to execute long-running processes in the background.
+## Overview
+Implemented asynchronous processing in the Airport Ground Operations Management System using Salesforce Apex. The objective was to move time-consuming operations to the background while keeping the user transaction fast and scalable.
 
-## Concepts Covered
+---
+
+## Topics Covered
+
 - Future Methods
 - Queueable Apex
 - Queueable Chaining
 - Batch Apex
-- Asynchronous Processing
-- Test Classes for Async Apex
+- Scheduled Apex
+- Asynchronous Job Monitoring
+- Test Classes for Asynchronous Apex
+
+---
 
 ## Implementations
 
-### Future Method
-Implemented a Future Method to execute background processing asynchronously.
+### 1. Future Method
+**Purpose**
+- Execute background processing asynchronously.
+- Used for non-blocking operations that do not require an immediate response.
 
-### Queueable Apex
-Created a Queueable Apex class to process Flight records asynchronously.
+**Learning**
+- Future methods execute after the current transaction completes.
+- Suitable for lightweight asynchronous tasks.
 
-### Queueable Chaining
-Implemented Queueable Chaining to execute multiple queueable jobs sequentially.
+---
 
-### Batch Apex
-Created `FlightBatchJob` implementing the `Database.Batchable` interface.
+### 2. Queueable Apex
+**Class**
+- `FlightPostProcessingJob`
 
-Functions implemented:
-- `start()`
-- `execute()`
-- `finish()`
+**Purpose**
+- Process flight-related background tasks after the main transaction.
+- Demonstrates structured asynchronous processing.
 
-The batch processes completed Flight records in configurable batch sizes.
+**Features**
+- Implements `Queueable`
+- Uses `System.enqueueJob()`
+- Keeps synchronous transactions lightweight
 
-### Test Class
-Created `FlightBatchJobTest`.
+---
 
-Verified:
-- Test data creation
-- Batch execution
-- Successful completion
-- 100% Test Pass
+### 3. Queueable Chaining
 
-## Learning Outcome
-- Understood when to use Future Methods.
-- Learned Queueable Apex and Queueable Chaining.
-- Implemented Batch Apex for processing large datasets.
-- Executed and tested asynchronous Apex successfully.
-- Gained practical experience with Salesforce background processing.
+**Purpose**
+- Execute one Queueable job after another.
+- Demonstrates sequential background processing.
 
-## Validation
-- Metadata deployed successfully.
-- Batch Apex test passed successfully.
-- Code committed and pushed to GitHub.
+**Learning**
+- First Queueable completes.
+- Second Queueable starts automatically.
+- Each job has a single responsibility.
 
-**GitHub Commit**
-Implemented Flight Batch Job with test class and bulk-safe Ground Service processing.
+---
+
+### 4. Batch Apex
+
+**Class**
+- `FlightBatchJob`
+
+**Purpose**
+- Process large numbers of Flight records efficiently.
+
+**Implementation**
+- Implemented `Database.Batchable<SObject>`
+- `start()` retrieves completed flights.
+- `execute()` processes records in batches.
+- `finish()` logs batch completion.
+
+**Concepts Learned**
+- Batch processing
+- Governor Limits
+- Bulk-safe processing
+- QueryLocator
+- Batch scope
+
+---
+
+### 5. Scheduled Apex
+
+**Class**
+- `FlightScheduler`
+
+**Purpose**
+- Automatically execute the Flight Batch Job on a schedule.
+
+**Implementation**
+- Implements `Schedulable`
+- Starts `FlightBatchJob` using `Database.executeBatch()`
+
+**Learning**
+- Automates recurring business operations.
+- Combines Scheduled Apex with Batch Apex.
+
+---
+
+## Testing
+
+Successfully created and executed test classes for:
+
+- FlightBatchJobTest
+- FlightSchedulerTest
+
+### Test Results
+
+✅ FlightBatchJobTest – Passed (100%)
+
+✅ FlightSchedulerTest – Passed (100%)
+
+---
+
+## Engineering Concepts Learned
+
+- Difference between synchronous and asynchronous processing.
+- Choosing the appropriate asynchronous mechanism.
+- Queueable vs Future Method.
+- Queueable chaining.
+- Batch processing for large datasets.
+- Scheduled execution using CRON expressions.
+- Importance of bulkification in asynchronous Apex.
+- Separation of responsibilities.
+- Scalable Salesforce architecture.
+
+---
+
+## Project Outcome
+
+Successfully implemented:
+
+- Future Method
+- Queueable Apex
+- Queueable Chaining
+- Batch Apex
+- Scheduled Apex
+- Test Classes
+- Bulk-safe asynchronous processing
+
+All implementations were deployed successfully and verified through passing Apex tests.
+
+---
+
+## Git Commit
+
+```
+Implemented Future, Queueable, Queueable Chaining, Batch Apex, Scheduled Apex, and corresponding test classes for asynchronous flight processing.
+```
+
+---
+
+## Skills Gained
+
+- Apex Asynchronous Programming
+- Queueable Apex
+- Future Methods
+- Batch Apex
+- Scheduled Apex
+- Queueable Chaining
+- Test Class Development
+- Governor Limits
+- Bulk Processing
+- Salesforce Backend Development
