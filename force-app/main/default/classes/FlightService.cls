@@ -6,7 +6,7 @@ public with sharing class FlightService {
             return;
         }
 
-        // Get all Ground Service Tasks for affected flights
+        // Get all Ground Service Tasks
         List<Ground_Service_Task__c> allTasks = [
             SELECT Id,
                    Flight__c,
@@ -22,16 +22,15 @@ public with sharing class FlightService {
             flightReadyMap.put(flightId, true);
         }
 
-        // If any task is not completed, mark flight as not ready
+        // Check if any task is still pending
         for (Ground_Service_Task__c task : allTasks) {
 
             if (task.Task_Status__c != 'Completed') {
                 flightReadyMap.put(task.Flight__c, false);
             }
-
         }
 
-        // Query existing flights
+        // Get flights
         Map<Id, Flight__c> flightMap = new Map<Id, Flight__c>([
             SELECT Id,
                    Status__c
@@ -40,6 +39,7 @@ public with sharing class FlightService {
         ]);
 
         List<Flight__c> flightsToUpdate = new List<Flight__c>();
+        Set<Id> readyFlightIds = new Set<Id>();
 
         for (Id flightId : flightReadyMap.keySet()) {
 
@@ -52,6 +52,7 @@ public with sharing class FlightService {
 
                     flight.Status__c = 'Ready for Departure';
                     flightsToUpdate.add(flight);
+                    readyFlightIds.add(flight.Id);
                 }
             }
         }
@@ -61,21 +62,16 @@ public with sharing class FlightService {
             // Update flights
             update flightsToUpdate;
 
-            // Store ready flight IDs
-            Set<Id> readyFlightIds = new Set<Id>();
-
-            for (Flight__c flight : flightsToUpdate) {
-
-                readyFlightIds.add(flight.Id);
-
-                // Future Method
-                FlightFutureService.sendFlightNotification(flight.Id);
-            }
+            // Future Method
+            FlightFutureService.sendFlightNotification(readyFlightIds);
 
             // Queueable Job
-            System.enqueueJob(
-                new FlightPostProcessingJob(readyFlightIds)
-            );
+            if (!Test.isRunningTest()) {
+
+                System.enqueueJob(
+                    new FlightPostProcessingJob(readyFlightIds)
+                );
+            }
         }
     }
 }

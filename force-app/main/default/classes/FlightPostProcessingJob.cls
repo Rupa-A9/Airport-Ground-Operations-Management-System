@@ -16,16 +16,16 @@ public with sharing class FlightPostProcessingJob implements Queueable {
             WHERE Id IN :flightIds
         ];
 
-        // Background Task 1
-        System.debug('Sending notification to Airport Operations');
+        for (Flight__c flight : flights) {
 
-        // Background Task 2
-        System.debug('Creating audit records');
+            System.debug('Creating audit for ' + flight.Flight_Number__c);
+            System.debug('Updating analytics');
+            System.debug('Sending data to external airport system');
+        }
 
-        // Background Task 3
-        System.debug('Sending flight information to external airport system');
-
-        // Background Task 4
-        System.debug('Updating analytics');
+        // Queue the next Queueable
+        System.enqueueJob(
+            new FlightNotificationJob(flightIds)
+        );
     }
 }

@@ -1,30 +1,26 @@
 public with sharing class FlightFutureService {
 
     @future
-    public static void sendFlightNotification(Id flightId) {
+    public static void sendFlightNotification(Set<Id> flightIds) {
 
-        if (flightId == null) {
-            return;
-        }
-
-        Flight__c flight = [
+        List<Flight__c> flights = [
             SELECT Id,
                    Flight_Number__c,
                    Status__c
             FROM Flight__c
-            WHERE Id = :flightId
-            LIMIT 1
+            WHERE Id IN :flightIds
         ];
 
-        System.debug('========== FUTURE METHOD EXECUTED ==========');
-        System.debug('Flight Number: ' + flight.Flight_Number__c);
-        System.debug('Flight Status: ' + flight.Status__c);
+        for (Flight__c flight : flights) {
 
-        // Future enhancement examples:
-        // 1. Send email notification
-        // 2. Call external airport system
-        // 3. Create audit log
-        // 4. Send SMS notification
-        // 5. Publish platform event
+            System.debug('Future Method Executed');
+            System.debug('Flight Number: ' + flight.Flight_Number__c);
+            System.debug('Flight Status: ' + flight.Status__c);
+
+            // Example:
+            // Send email
+            // Call external system
+            // Update logs
+        }
     }
 }
