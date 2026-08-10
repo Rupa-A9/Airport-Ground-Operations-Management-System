@@ -1,0 +1,93 @@
+<template>
+
+    <lightning-card
+        title={task.Name}
+        icon-name="standard:task">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Flight -->
+            <p class="slds-m-bottom_small">
+
+                <strong>Flight:</strong>
+
+                {task.Flight__r.Flight_Number__c}
+
+            </p>
+
+
+            <!-- Task Type -->
+            <p class="slds-m-bottom_small">
+
+                <strong>Task Type:</strong>
+
+                {task.Task_Type__c}
+
+            </p>
+
+
+            <!-- Priority -->
+            <p class="slds-m-bottom_small">
+
+                <strong>Priority:</strong>
+
+                {task.Priority__c}
+
+            </p>
+
+
+            <!-- Status -->
+            <p class="slds-m-bottom_medium">
+
+                <strong>Status:</strong>
+
+                {task.Task_Status__c}
+
+            </p>
+
+
+            <!-- READY STATE -->
+            <template if:true={isReady}>
+
+                <lightning-button
+                    label="Complete Task"
+                    variant="brand"
+                    onclick={handleCompleteTask}>
+                </lightning-button>
+
+            </template>
+
+
+            <!-- PROCESSING STATE -->
+            <template if:true={isSubmitting}>
+
+                <lightning-spinner
+                    alternative-text="Completing task"
+                    size="small">
+                </lightning-spinner>
+
+                <p class="slds-m-top_small">
+
+                    Submitting...
+
+                </p>
+
+            </template>
+
+
+            <!-- SUCCESS STATE -->
+            <template if:true={isCompleted}>
+
+                <div class="slds-text-color_success">
+
+                    ✓ Task Completed
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
