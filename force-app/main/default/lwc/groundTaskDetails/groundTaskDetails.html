@@ -1,0 +1,48 @@
+
+<template>
+
+    <template if:true={task}>
+
+        <lightning-card
+            title="Ground Task Details"
+            icon-name="standard:task">
+
+            <div class="slds-p-around_medium">
+
+                <!-- Task Name -->
+                <p class="slds-m-bottom_small">
+                    <strong>Task Name:</strong>
+                    {task.Name}
+                </p>
+
+                <!-- Flight -->
+                <p class="slds-m-bottom_small">
+                    <strong>Flight:</strong>
+                    {task.Flight__r.Flight_Number__c}
+                </p>
+
+                <!-- Task Type -->
+                <p class="slds-m-bottom_small">
+                    <strong>Task Type:</strong>
+                    {task.Task_Type__c}
+                </p>
+
+                <!-- Priority -->
+                <p class="slds-m-bottom_small">
+                    <strong>Priority:</strong>
+                    {task.Priority__c}
+                </p>
+
+                <!-- Status -->
+                <p class="slds-m-bottom_small">
+                    <strong>Status:</strong>
+                    {task.Task_Status__c}
+                </p>
+
+            </div>
+
+        </lightning-card>
+
+    </template>
+
+</template>

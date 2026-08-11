@@ -1,3 +1,4 @@
+
 <template>
 
     <lightning-card
@@ -27,16 +28,12 @@
             </template>
 
 
-            <!-- Empty State -->
             <template if:true={showEmptyState}>
 
-                <div class="slds-text-align_center slds-p-around_medium">
-
-                    <p>
-                        No ground service tasks found.
-                    </p>
-
-                </div>
+                <c-empty-state
+                    title="No Ground Service Tasks"
+                    message="There are no ground service tasks available right now.">
+                </c-empty-state>
 
             </template>
 
@@ -61,12 +58,27 @@
                             <c-ground-task-card
                                 task={task}
                                 processing-task-id={processingTaskId}
-                                oncompletetask={handleCompleteTask}>
+                                oncompletetask={handleCompleteTask}
+                                onviewdetails={handleViewDetails}>
                             </c-ground-task-card>
 
                         </div>
 
                     </template>
+
+                </div>
+
+            </template>
+
+
+            <!-- Selected Task Details -->
+            <template if:true={selectedTask}>
+
+                <div class="slds-m-top_medium">
+
+                    <c-ground-task-details
+                        task={selectedTask}>
+                    </c-ground-task-details>
 
                 </div>
 

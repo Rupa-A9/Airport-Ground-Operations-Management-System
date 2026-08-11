@@ -1,31 +1,22 @@
-import { LightningElement, api } from 'lwc';
 
+import { LightningElement, api } from 'lwc';
 
 export default class GroundTaskCard extends LightningElement {
 
-    // ============================================
-    // Data received from Parent
-    // ============================================
-
+    // Data received from parent
     @api task;
 
     @api processingTaskId;
 
 
-    // ============================================
-    // Processing State
-    // ============================================
-
+    // Check whether this task is currently being processed
     get isSubmitting() {
 
         return this.processingTaskId === this.task?.Id;
     }
 
 
-    // ============================================
-    // Ready State
-    // ============================================
-
+    // Check whether task can be completed
     get isReady() {
 
         return this.task &&
@@ -34,10 +25,7 @@ export default class GroundTaskCard extends LightningElement {
     }
 
 
-    // ============================================
-    // Completed State
-    // ============================================
-
+    // Check whether task is already completed
     get isCompleted() {
 
         return this.task &&
@@ -45,37 +33,39 @@ export default class GroundTaskCard extends LightningElement {
     }
 
 
-    // ============================================
-    // User Clicks Complete
-    // ============================================
+    // View Details
+    handleViewDetails() {
 
+        this.dispatchEvent(
+            new CustomEvent('viewdetails', {
+                detail: {
+                    taskId: this.task.Id
+                }
+            })
+        );
+    }
+
+
+    // Complete Task
     handleCompleteTask() {
 
-        // Protect against repeated clicks
-
+        // Prevent repeated clicks
         if (
             this.isSubmitting ||
             this.isCompleted
         ) {
-
             return;
         }
 
 
         // Send event to parent
-
         this.dispatchEvent(
-
-            new CustomEvent(
-                'completetask',
-
-                {
-                    detail: {
-                        taskId: this.task.Id
-                    }
+            new CustomEvent('completetask', {
+                detail: {
+                    taskId: this.task.Id
                 }
-            )
-
+            })
         );
     }
+
 }

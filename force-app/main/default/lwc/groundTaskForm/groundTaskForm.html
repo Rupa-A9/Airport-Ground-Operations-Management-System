@@ -1,0 +1,95 @@
+
+<template>
+
+    <lightning-card
+        title="Create Ground Service Task"
+        icon-name="standard:task">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Flight Number -->
+            <lightning-input
+                label="Flight Number"
+                name="flightNumber"
+                value={flightNumber}
+                onchange={handleChange}
+                required>
+            </lightning-input>
+
+
+            <!-- Task Type -->
+            <lightning-combobox
+                class="slds-m-top_medium"
+                label="Task Type"
+                name="taskType"
+                value={taskType}
+                options={taskTypeOptions}
+                onchange={handleChange}
+                required>
+            </lightning-combobox>
+
+
+            <!-- Priority -->
+            <lightning-combobox
+                class="slds-m-top_medium"
+                label="Priority"
+                name="priority"
+                value={priority}
+                options={priorityOptions}
+                onchange={handleChange}
+                required>
+            </lightning-combobox>
+
+
+            <!-- Status -->
+            <lightning-combobox
+                class="slds-m-top_medium"
+                label="Status"
+                name="status"
+                value={status}
+                options={statusOptions}
+                onchange={handleChange}
+                required>
+            </lightning-combobox>
+
+
+            <!-- Buttons -->
+            <div class="slds-m-top_medium">
+
+                <lightning-button
+                    label="Clear"
+                    variant="neutral"
+                    onclick={handleClear}
+                    class="slds-m-right_small">
+                </lightning-button>
+
+
+                <lightning-button
+                    label="Create Task"
+                    variant="brand"
+                    onclick={handleSubmit}
+                    disabled={isSaving}>
+                </lightning-button>
+
+            </div>
+
+
+            <!-- Loading -->
+            <template if:true={isSaving}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-spinner
+                        alternative-text="Creating ground service task"
+                        size="small">
+                    </lightning-spinner>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

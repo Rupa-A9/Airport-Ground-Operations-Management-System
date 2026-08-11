@@ -1,4 +1,7 @@
-import { LightningElement, wire } from 'lwc';
+import {
+    LightningElement,
+    wire
+} from 'lwc';
 
 import getGroundTasks
     from '@salesforce/apex/GroundTaskController.getGroundTasks';
@@ -11,6 +14,11 @@ import { refreshApex }
 
 import { ShowToastEvent }
     from 'lightning/platformShowToastEvent';
+
+import {
+    registerRefreshHandler,
+    unregisterRefreshHandler
+} from 'lightning/refresh';
 
 
 export default class GroundTaskList extends LightningElement {
@@ -29,9 +37,42 @@ export default class GroundTaskList extends LightningElement {
 
     wiredTasksResult;
 
+    selectedTask;
+
+    refreshHandlerId;
+
 
     // ============================================
-    // Retrieve Tasks
+    // Component Connected
+    // ============================================
+
+    connectedCallback() {
+
+        this.refreshHandlerId =
+            registerRefreshHandler(
+                this,
+                this.handleRefresh.bind(this)
+            );
+    }
+
+
+    // ============================================
+    // Component Disconnected
+    // ============================================
+
+    disconnectedCallback() {
+
+        if (this.refreshHandlerId) {
+
+            unregisterRefreshHandler(
+                this.refreshHandlerId
+            );
+        }
+    }
+
+
+    // ============================================
+    // Retrieve Ground Tasks
     // ============================================
 
     @wire(getGroundTasks)
@@ -41,6 +82,7 @@ export default class GroundTaskList extends LightningElement {
 
         const { data, error } = result;
 
+
         if (data) {
 
             this.tasks = data;
@@ -49,7 +91,9 @@ export default class GroundTaskList extends LightningElement {
 
             this.isLoading = false;
 
-        } else if (error) {
+        }
+
+        else if (error) {
 
             this.tasks = [];
 
@@ -62,27 +106,60 @@ export default class GroundTaskList extends LightningElement {
 
 
     // ============================================
-    // Handle Complete Task
+    // Handle Lightning Refresh
+    // ============================================
+
+    async handleRefresh() {
+
+        if (this.wiredTasksResult) {
+
+            await refreshApex(
+                this.wiredTasksResult
+            );
+        }
+    }
+
+
+    // ============================================
+    // View Task Details
+    // ============================================
+
+    handleViewDetails(event) {
+
+        const taskId =
+            event.detail.taskId;
+
+        this.selectedTask =
+            this.tasks.find(
+                task => task.Id === taskId
+            );
+    }
+
+
+    // ============================================
+    // Complete Task
     // ============================================
 
     async handleCompleteTask(event) {
 
-        const taskId = event.detail.taskId;
+        const taskId =
+            event.detail.taskId;
 
-        this.processingTaskId = taskId;
+        this.processingTaskId =
+            taskId;
 
         this.errorMessage = undefined;
 
 
         try {
 
-            // Call Apex imperatively
+            // Call Apex
             await completeTask({
                 taskId: taskId
             });
 
 
-            // Success message
+            // Show success message
             this.showToast(
                 'Success',
                 'Ground service task completed successfully.',
@@ -90,13 +167,14 @@ export default class GroundTaskList extends LightningElement {
             );
 
 
-            // Refresh wired data
+            // Refresh task data
             await refreshApex(
                 this.wiredTasksResult
             );
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
             this.errorMessage =
                 this.getErrorMessage(error);
@@ -108,10 +186,12 @@ export default class GroundTaskList extends LightningElement {
                 'error'
             );
 
+        }
 
-        } finally {
+        finally {
 
-            this.processingTaskId = undefined;
+            this.processingTaskId =
+                undefined;
         }
     }
 
@@ -141,15 +221,22 @@ export default class GroundTaskList extends LightningElement {
 
 
     // ============================================
-    // Toast Message
+    // Show Toast
     // ============================================
 
-    showToast(title, message, variant) {
+    showToast(
+        title,
+        message,
+        variant
+    ) {
 
         this.dispatchEvent(
             new ShowToastEvent({
+
                 title: title,
+
                 message: message,
+
                 variant: variant
             })
         );
@@ -157,7 +244,7 @@ export default class GroundTaskList extends LightningElement {
 
 
     // ============================================
-    // Error Message
+    // Get Error Message
     // ============================================
 
     getErrorMessage(error) {
@@ -167,10 +254,12 @@ export default class GroundTaskList extends LightningElement {
             return error.body.message;
         }
 
+
         if (error?.message) {
 
             return error.message;
         }
+
 
         return 'Unable to process the request. Please try again.';
     }
