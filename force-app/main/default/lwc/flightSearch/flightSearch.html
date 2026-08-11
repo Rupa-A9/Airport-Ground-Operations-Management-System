@@ -1,32 +1,65 @@
 <template>
 
-    <lightning-card title="Flight Search" icon-name="standard:flight">
+    <lightning-card
+        title="Flight Search"
+        icon-name="standard:flight">
 
         <div class="slds-p-around_medium">
 
             <lightning-input
                 label="Flight Number"
                 value={searchKey}
-                onchange={handleChange}>
+                onchange={handleChange}
+                placeholder="Enter flight number, e.g. AI202">
             </lightning-input>
 
-            <br/>
+            <div class="slds-m-top_medium">
 
-            <lightning-button
-                label="Search"
-                variant="brand"
-                onclick={handleSearch}>
-            </lightning-button>
+                <lightning-button
+                    label="Search"
+                    variant="brand"
+                    onclick={handleSearch}>
+                </lightning-button>
+
+                <lightning-button
+                    label="Sync Flight"
+                    variant="neutral"
+                    class="slds-m-left_small"
+                    onclick={handleSync}
+                    disabled={isSyncing}>
+                </lightning-button>
+
+            </div>
+
+            <template if:true={isSyncing}>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-spinner
+                        alternative-text="Synchronizing flight">
+                    </lightning-spinner>
+
+                </div>
+
+            </template>
 
         </div>
 
-        <template if:true={flights}>
+        <template if:true={flights.length}>
 
             <lightning-datatable
                 key-field="Id"
                 data={flights}
                 columns={columns}>
             </lightning-datatable>
+
+        </template>
+
+        <template if:false={flights.length}>
+
+            <div class="slds-p-around_medium">
+                No flight records found.
+            </div>
 
         </template>
 
