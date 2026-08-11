@@ -90,13 +90,11 @@ public with sharing class AirportService {
 
         // Crew should be available
         if (crew.Availability__c != 'Available') {
-
             return false;
         }
 
         // Task should be pending
         if (task.Task_Status__c != 'Pending') {
-
             return false;
         }
 
@@ -116,14 +114,13 @@ public with sharing class AirportService {
         update task;
     }
 
-    
+    // ============================
     // Update Flight Status
-   
-
-
-
-    
-    public static void updateFlightStatus(Id flightId, String status) {
+    // ============================
+    public static void updateFlightStatus(
+        Id flightId,
+        String status
+    ) {
 
         Flight__c flight = getFlight(flightId);
 
@@ -131,35 +128,80 @@ public with sharing class AirportService {
 
         update flight;
     }
-    
+
+    // ============================
+    // Get All Flights
+    // ============================
     @AuraEnabled(cacheable=true)
-public static List<Flight__c> getAllFlights() {
-    return [
-        SELECT Id,
-               Flight_Number__c,
-               Airline__c,
-               Status__c,
-               Terminal__c,
-               Passenger_Count__c
-        FROM Flight__c
-        ORDER BY Flight_Number__c
-    ];
-}
+    public static List<Flight__c> getAllFlights() {
 
-@AuraEnabled(cacheable=true)
-public static List<Flight__c> searchFlights(String flightNumber) {
+        return [
+            SELECT Id,
+                   Flight_Number__c,
+                   Airline__c,
+                   Status__c,
+                   Terminal__c,
+                   Passenger_Count__c
+            FROM Flight__c
+            ORDER BY Flight_Number__c
+        ];
+    }
 
-    return [
-        SELECT Id,
-               Flight_Number__c,
-               Airline__c,
-               Status__c,
-               Terminal__c,
-               Passenger_Count__c
-        FROM Flight__c
-        WHERE Flight_Number__c LIKE :('%' + flightNumber + '%')
-        ORDER BY Flight_Number__c
-    ];
-}
+    // ============================
+    // Search Flights
+    // ============================
+    @AuraEnabled(cacheable=true)
+    public static List<Flight__c> searchFlights(
+        String flightNumber
+    ) {
 
+        return [
+            SELECT Id,
+                   Flight_Number__c,
+                   Airline__c,
+                   Status__c,
+                   Terminal__c,
+                   Passenger_Count__c
+            FROM Flight__c
+            WHERE Flight_Number__c LIKE :('%' + flightNumber + '%')
+            ORDER BY Flight_Number__c
+        ];
+    }
+
+    // ============================
+    // Sprint 34 - Manual Flight Sync
+    // ============================
+    @AuraEnabled
+    public static String syncFlightFromExternalSystem(
+        String flightNumber
+    ) {
+
+        if (String.isBlank(flightNumber)) {
+            throw new AuraHandledException(
+                'Please enter a flight number.'
+            );
+        }
+
+        List<Flight__c> flights = [
+            SELECT Id
+            FROM Flight__c
+            WHERE Flight_Number__c = :flightNumber
+            LIMIT 1
+        ];
+
+        if (flights.isEmpty()) {
+            throw new AuraHandledException(
+                'Flight not found: ' + flightNumber
+            );
+        }
+
+        System.enqueueJob(
+            new FlightOperationsSyncJob(
+                new Set<Id>{ flights[0].Id }
+            )
+        );
+
+        return 'Flight synchronization started for ' +
+               flightNumber;
+    }
 }
