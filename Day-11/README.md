@@ -103,20 +103,6 @@ Connected the flight integration functionality with the Salesforce user interfac
 - Terminal
 - Passenger Count
 
-## Technologies Used
-
-- Salesforce
-- Apex
-- Lightning Web Components
-- SOQL
-- REST API
-- HTTP Callouts
-- JSON
-- Named Credentials
-- Queueable Apex
-- Scheduled Apex
-- Salesforce Custom Objects
-- Git & GitHub
 
 ## Project Evidence
 
