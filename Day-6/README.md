@@ -28,3 +28,30 @@ Salesforce Record Event
  Business Logic
         ↓
  Salesforce Records
+
+ ## Key Concepts
+
+- Apex Triggers
+- Before and After Trigger Events
+- Trigger Context
+- Service Classes
+- Event-Driven Automation
+- Separation of Responsibilities
+- Reusable Trigger Architecture
+- Maintainable Apex Design
+
+## Engineering Principles
+
+- Triggers should coordinate rather than contain complex business logic.
+- Business logic should remain inside Service classes.
+- Automation should respond automatically to important business events.
+- Service classes should be reusable and maintainable.
+- Clean Trigger architecture makes future enhancements easier.
+
+## Learning Outcome
+
+Learned how Apex Triggers can automatically respond to Salesforce record events and how separating business logic into Service classes improves code maintainability, reusability, and scalability.
+
+## Conclusion
+
+Day 6 introduced event-driven automation into the Airport Ground Operations Management System. The project can now respond automatically to important record changes while keeping the Trigger layer clean and the business logic organized in Service classes.
