@@ -1,23 +1,229 @@
+# Airport Ground Operations Management System
 
-# Salesforce DX Project: Next Steps
+## Project Overview
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+The Airport Ground Operations Management System is a Salesforce-based application designed to centralize and manage airport ground operations.
 
-## How Do You Plan to Deploy Your Changes?
+The system helps coordinate activities performed by different airport ground service teams, including Gate Management, Ground Crew, Fuel Team, Cleaning Team, Catering Team, and Maintenance Team.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+The project was developed using Salesforce development practices including Apex, Lightning Web Components (LWC), SOQL, asynchronous Apex, REST integration, Named Credentials, Git, and Salesforce CLI.
 
-## Configure Your Salesforce DX Project
+---
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## Problem Statement
 
-## Read All About It
+Airport ground operations involve multiple teams working together to prepare and manage flights efficiently.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+Managing these activities manually can lead to:
 
-# Airport-Ground-Operations-Management-System
-Enterprise Salesforce project that automates airport ground operations using Custom Objects, Validation Rules, Apex Triggers, Flow Builder, Lightning Web Components, Reports, Dashboards, and Security.
+- Delayed task assignment
+- Poor coordination between teams
+- Difficulty tracking task status
+- Lack of centralized flight information
+- Communication gaps between departments
+- Difficulty monitoring operational requests
 
+This project provides a centralized Salesforce solution to manage flights and their associated ground service activities.
+
+---
+
+## Objectives
+
+- Centralize airport flight and ground operation information
+- Manage airport ground service requests
+- Track the status and priority of operational tasks
+- Improve coordination between airport teams
+- Automate operational processes using Salesforce
+- Provide an interactive Lightning Web Component interface
+- Integrate external systems using REST APIs
+- Follow Salesforce development and deployment best practices
+
+---
+
+## Salesforce Objects
+
+The project contains the following custom objects:
+
+- Flight
+- Aircraft
+- Gate
+- Ground Crew
+- Cleaning Request
+- Fuel Request
+- Catering Request
+- Maintenance Request
+- Ground Service Task
+
+These objects represent the main entities involved in airport ground operations.
+
+---
+
+## Main Functional Areas
+
+### Flight Management
+
+The Flight object stores information related to airport flights, including flight number, airline, status, terminal, and passenger information.
+
+### Gate Management
+
+Gate information is maintained to support flight and airport gate operations.
+
+### Ground Service Management
+
+Ground Service Tasks are used to manage operational activities such as:
+
+- Refueling
+- Cleaning
+- Baggage handling
+- Catering
+- Maintenance
+
+Tasks can be assigned and tracked based on their type, priority, and status.
+
+### Request Management
+
+Separate request objects are used for:
+
+- Cleaning requests
+- Fuel requests
+- Catering requests
+- Maintenance requests
+
+This provides better organization of operational requirements.
+
+---
+
+## Technology Stack
+
+### Salesforce
+
+- Salesforce Platform
+- Apex
+- SOQL
+- Lightning Web Components
+- Lightning Data Service
+- Flows
+- Queueable Apex
+- Batch Apex
+- Scheduled Apex
+- REST Integration
+- Named Credentials
+
+### Development Tools
+
+- Salesforce CLI
+- Visual Studio Code
+- Git
+- GitHub
+- Salesforce Developer Org
+
+---
+
+## Apex Development
+
+Apex is used to implement server-side business logic and Salesforce automation.
+
+The project includes concepts such as:
+
+- Apex Classes
+- Apex Triggers
+- SOQL
+- DML
+- Bulkification
+- Governor Limits
+- Queueable Apex
+- Batch Apex
+- Scheduled Apex
+- REST callouts
+
+The application follows bulk-processing principles by avoiding unnecessary SOQL and DML operations inside loops.
+
+---
+
+## Lightning Web Components
+
+The project uses Lightning Web Components to provide interactive user interfaces.
+
+Major components include:
+
+- Flight Dashboard
+- Flight Search
+- Ground Task List
+- Ground Task Card
+- Ground Task Details
+- Ground Task Form
+
+The components support functionality such as:
+
+- Displaying flight information
+- Searching flights
+- Displaying ground service tasks
+- Viewing task details
+- Creating ground service tasks
+- Parent-child component communication
+- Event-based communication
+- Loading and error states
+
+---
+
+## Asynchronous Processing
+
+Asynchronous Apex is used when processing can be performed outside the immediate transaction.
+
+The project covers:
+
+- Future methods
+- Queueable Apex
+- Batch Apex
+- Scheduled Apex
+
+These mechanisms help handle operations that may require separate processing or larger volumes of data.
+
+---
+
+## REST Integration
+
+The project includes REST integration to communicate with an external system.
+
+The integration is designed to retrieve and process flight-related information and update Salesforce records accordingly.
+
+Named Credentials are used to manage external authentication and connection configuration.
+
+---
+
+## Development Workflow
+
+The project follows a source-controlled Salesforce development workflow.
+
+```text
+Developer Org
+      |
+      v
+Salesforce Metadata
+      |
+      v
+Local Salesforce Project
+      |
+      v
+Git Feature Branch
+      |
+      v
+Commit
+      |
+      v
+GitHub
+      |
+      v
+Pull Request
+      |
+      v
+Code Review
+      |
+      v
+Merge
+      |
+      v
+Salesforce CLI Deployment
+      |
+      v
+Test and Verify
