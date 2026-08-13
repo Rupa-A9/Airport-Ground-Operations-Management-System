@@ -11,7 +11,7 @@ The objective of Day 4 was to understand Lightning Web Components and build the 
 - Worked with HTML, JavaScript, and Meta XML files.
 - Implemented basic data binding.
 - Created buttons and handled click events using JavaScript.
-- Built a basic Placement Portal interface.
+- Built a basic Airport Gorund Operations Management interface.
 - Deployed the LWC to a Lightning Page.
 - Practiced building UI without Apex or database connectivity.
 
