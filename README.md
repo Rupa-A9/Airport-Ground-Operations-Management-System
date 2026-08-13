@@ -50,7 +50,7 @@ force-app/
         ├── flows/
         └── ...
 
-## Learning Progress
+**Learning Progress** 
 
 The project was developed progressively through multiple training days and sprints covering Salesforce development, Apex, automation, LWC, asynchronous processing, and integrations.
 
